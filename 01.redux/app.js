@@ -7,8 +7,27 @@ const state = {
   obj: null,
 }
 
-/* action(객체) */
+/* action creater(객체) */
+const changeStr = (payload) => {
+  return {
+    type: 'CHANGE_STR',
+    payload: payload.toString() 
+  }
+}
 
+const changeNum = (payload) => {
+  return {
+    type: 'CHANGE_NUM',
+    payload: Number(payload) 
+  }
+}
+
+const changeObj = (payload) => {
+  return {
+    type: 'CHANGE_OBJ',
+    payload
+  }
+}
 
 
 /* reducer(하나의 함수) */
@@ -45,7 +64,14 @@ store.subscribe(() => {
 
 /* 실행(dispatch) */
 console.log(store.getState());
-store.dispatch({ // 동기
+store.dispatch(changeStr('A'));
+store.dispatch(changeNum(2));
+store.dispatch(changeObj({
+  userId: 'booldook',
+  userName: '불뚝',
+}));
+
+/* store.dispatch({ // 동기
   type: 'CHANGE_STR',
   payload: 'A',
 });
@@ -63,4 +89,4 @@ store.dispatch({ // 동기
     userId: 'booldook',
     userName: '불뚝',
   },
-});
+}); */
