@@ -6,17 +6,26 @@ const initState = {
     userName: '',
     email: '',
   },
-  token: {}
 }
 
 const authReducer = (prevState = initState, action) => {
   switch(action.type) {
-    case 'LOGIN':
+    case 'LOGIN_PENDING':
+      return {
+        ...prevState,
+      }
+    case 'LOGIN_FULFILLED':
+      console.log(action.payload)
       return {
         ...prevState,
         isLogging: true,
         user: action.payload.user,
-        token: action.payload.token,
+      }
+    case 'LOGIN_REJECTED':
+      return {
+        ...prevState,
+        isLogging: false,
+        user: {},
       }
     case 'LOGOUT':
     default:
