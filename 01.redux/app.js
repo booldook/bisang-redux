@@ -33,7 +33,8 @@ const changeObj = (payload) => {
 /* reducer(하나의 함수) */
 const reducer = (prevState, action) => {
   switch(action.type) {
-    case 'CHANGE_STR':
+    // case 'CHANGE_STR':
+    case 'test.str':
       return {
         ...prevState,
         str: action.payload,

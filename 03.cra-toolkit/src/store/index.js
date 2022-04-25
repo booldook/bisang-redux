@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import logger from 'redux-logger'
-import counterReducer from '../features/counter/counterSlice';
+import logger from 'redux-logger';
+import coordSlice from './slice/coord-slice';
 
 const myMiddleware = (store) => (next) => (action) => {
   console.log('미들웨어 디스패치 전');
@@ -8,10 +8,10 @@ const myMiddleware = (store) => (next) => (action) => {
   console.log('미들웨어 디스패치 후');
 }
 
-export const store = configureStore({
+export default configureStore({
   reducer: {
-    counter: counterReducer,
+    coord: coordSlice,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(myMiddleware, logger),
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(myMiddleware, logger),
   devTools: process.env.NODE_ENV !== 'production',
 });
