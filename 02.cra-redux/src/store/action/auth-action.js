@@ -1,4 +1,3 @@
-import {  } from 'redux'; 
 import axios from 'axios';
 
 
@@ -6,7 +5,6 @@ import axios from 'axios';
 // fulfilled: 정상응답
 // rejected: 에러응답
 // 동기
-
 const actionLogInPending = () => {
   return {
     type: 'LOGIN_PENDING',
@@ -49,7 +47,7 @@ const logIn = (userName) => {
 }
 
 // 동기
-const logOut = (payload) => {
+const logOut = () => {
   return {
     type: 'LOGOUT',
     payload: {

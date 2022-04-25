@@ -1,36 +1,33 @@
+import produce from 'immer';
+
 const initState = {
+  isAuthLoading: false,
   isLogging: false,
-  user: {
-    idx: '',
-    userId: '',
-    userName: '',
-    email: '',
-  },
+  user: {},
 }
 
-const authReducer = (prevState = initState, action) => {
+const authReducer = produce((draft, action) => {
   switch(action.type) {
     case 'LOGIN_PENDING':
-      return {
-        ...prevState,
-      }
+      draft.isAuthLoading = true;
+      break;
     case 'LOGIN_FULFILLED':
-      console.log(action.payload)
-      return {
-        ...prevState,
-        isLogging: true,
-        user: action.payload.user,
-      }
+      draft.isAuthLoading = false;
+      draft.isLogging = true;
+      draft.user = action.payload.user;
+      break;
     case 'LOGIN_REJECTED':
-      return {
-        ...prevState,
-        isLogging: false,
-        user: {},
-      }
+      draft.isAuthLoading = false;
+      draft.isLogging = false;
+      break;
     case 'LOGOUT':
+      draft.isAuthLoading = false;
+      draft.isLogging = false;
+      draft.user = {}
+      break;
     default:
-      return prevState
+      return initState;
   }
-}
+});
 
 export default authReducer;

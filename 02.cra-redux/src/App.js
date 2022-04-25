@@ -1,10 +1,11 @@
 import React, { useCallback } from "react";
-import { useDispatch } from 'react-redux';
-import store from './store';
+import { useDispatch, useSelector } from 'react-redux';
 import { logIn, logOut } from './store/action/auth-action';
 
 function App() {
   const dispatch = useDispatch();
+  const isLogging = useSelector(state => state.auth.isLogging);
+  const user = useSelector(state => state.auth.user);
 
   const handleLogIn = useCallback(() => {
     dispatch(logIn('Bret'));
@@ -17,7 +18,10 @@ function App() {
   return (
     <div>
       <div>
-        { store.getState().auth.isLogging.toString() }
+        { isLogging.toString() }
+      </div>
+      <div>
+        { user && user.username }
       </div>
       <button onClick={handleLogIn}>로그인</button>
       <button onClick={handleLogOut}>로그아웃</button>
