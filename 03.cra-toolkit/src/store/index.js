@@ -10,7 +10,7 @@ const myMiddleware = (store) => (next) => (action) => {
 
 export default configureStore({
   reducer: {
-    coord: coordSlice,
+    coord: coordSlice.reducer,
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(myMiddleware, logger),
   devTools: process.env.NODE_ENV !== 'production',

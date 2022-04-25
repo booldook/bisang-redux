@@ -5,12 +5,12 @@ const name = 'coord';
 
 /** initialState */
 const initialState = {
-  lat: null,
-  lon: null
+  lat: '',
+  lon: ''
 }
 
 /** async Thunk */
-export const retrieveCoord = createAsyncThunk(`coord/retrieveCoord`, async (payload, { rejectWithValue }) => {
+export const retrieveCoord = createAsyncThunk(`${name}/retrieveCoord`, async (payload, { rejectWithValue }) => {
   try {
     const { lat, lon } = await coordApi();
     return { lat, lon }
@@ -25,8 +25,8 @@ export const retrieveCoord = createAsyncThunk(`coord/retrieveCoord`, async (payl
 // resetCoord(state, action) {
 const reducers = {
   resetCoord(state, { payload }) { 
-    state.lat = 0;
-    state.lon = 0;
+    state.lat = '';
+    state.lon = '';
   }
 }
 
@@ -52,4 +52,4 @@ const coordSlice = createSlice({ name, initialState, reducers, extraReducers });
 console.log(coordSlice);
 
 export const { resetCoord } = coordSlice.actions;
-export default coordSlice.reducer;
+export default coordSlice;
