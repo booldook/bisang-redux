@@ -30,26 +30,44 @@ const reducers = {
   }
 }
 
-const extraReducers = builder => {
-  builder
-  .addCase(retrieveCoord.pending, (state, { payload }) => {
+
+/* const extraReducers = {
+  [retrieveCoord.pending](state, action){
     state.lat = '';
     state.lon = '';
-  })
-  .addCase(retrieveCoord.fulfilled, (state, { payload }) => {
-    console.log(payload);
-    state.lat = payload.lat;
-    state.lon = payload.lon;
-  })
-  .addCase(retrieveCoord.rejected, (state, { payload }) => {
+  },
+  [retrieveCoord.fulfilled](state, action){
+    state.lat = action.payload.lat;
+    state.lon = action.payload.lon;
+  },
+  [retrieveCoord.rejected](state, action){
     state.lat = '';
     state.lon = '';
-  })
-}
+  },
+} */
+
+
+const extraReducers = builder => builder
+.addCase(retrieveCoord.pending, (state, { payload }) => {
+  state.lat = '';
+  state.lon = '';
+})
+.addCase(retrieveCoord.fulfilled, (state, { payload }) => {
+  state.lat = payload.lat;
+  state.lon = payload.lon;
+})
+.addCase(retrieveCoord.rejected, (state, { payload }) => {
+  state.lat = '';
+  state.lon = '';
+});
+
+/* coord/retrieveCoord/pending
+coord/retrieveCoord/pending
+coord/retrieveCoord/pending
+coord/resetCoord */
 
 
 const coordSlice = createSlice({ name, initialState, reducers, extraReducers });
-console.log(coordSlice);
 
 export const { resetCoord } = coordSlice.actions;
 export default coordSlice;
